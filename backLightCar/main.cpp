@@ -1,11 +1,8 @@
 #include "main.h"
-#include <string>
 
 RwRGBA color;
-char text[256];
 
 void __cdecl CShadows__StoreShadowForVehicle(void* CVehicle, int vehicleShadowType) {
-	//MessageBoxA(**reinterpret_cast<HWND**>(0xC17054), std::to_string(*(short*)((DWORD)CVehicle + 0x22)).c_str(), "TEXT", MB_OK);
 	uint32_t col_table = *(uint32_t*)(0x4C8390);
 	uint8_t m_nPrimaryColor = *(uint8_t*)((uint32_t)CVehicle + 0x434);
 	color = colorConverter(*(uint32_t*)(col_table + (m_nPrimaryColor * 4)));
@@ -71,4 +68,5 @@ AsiPlugin::~AsiPlugin() {
 	CTimer__UpdateHook->remove();
 	CShadows__StoreShadowForVehicleHook->remove();
 	CShadows__StoreStaticShadowHook->remove();
+	CShadows__StoreShadowToBeRenderedHook->remove();
 }
